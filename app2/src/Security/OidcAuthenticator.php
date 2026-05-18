@@ -32,6 +32,7 @@ class OidcAuthenticator extends OAuth2Authenticator implements AuthenticationEnt
         private readonly EntityManagerInterface $em,
         private readonly RouterInterface $router,
         private readonly string $idpBaseUrl,
+        private readonly string $idpClientId,
     ) {}
 
     public function start(Request $request, ?AuthenticationException $authException = null): Response
@@ -109,13 +110,26 @@ class OidcAuthenticator extends OAuth2Authenticator implements AuthenticationEnt
             ],
         ]);
 
-        $url      = rtrim($this->idpBaseUrl, '/') . '/oauth/userinfo';
-        $response = @file_get_contents($url, false, $context);
+        $expectedIss = rtrim($this->idpBaseUrl, '/');
+        $url         = $expectedIss . '/oauth/userinfo';
+        $response    = @file_get_contents($url, false, $context);
 
         if ($response === false) {
             throw new CustomUserMessageAuthenticationException('Could not reach the authentication server.');
         }
 
-        return json_decode($response, true) ?? [];
+        $data = json_decode($response, true) ?? [];
+
+        if (($data['iss'] ?? null) !== $expectedIss) {
+            throw new CustomUserMessageAuthenticationException('Token issuer mismatch.');
+        }
+
+        $aud = $data['aud'] ?? null;
+        $audiences = is_array($aud) ? $aud : [$aud];
+        if (!in_array($this->idpClientId, $audiences, true)) {
+            throw new CustomUserMessageAuthenticationException('Token audience mismatch.');
+        }
+
+        return $data;
     }
 }

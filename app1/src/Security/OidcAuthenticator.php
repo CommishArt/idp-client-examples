@@ -127,7 +127,9 @@ class OidcAuthenticator extends OAuth2Authenticator implements AuthenticationEnt
             throw new CustomUserMessageAuthenticationException('Token issuer mismatch.');
         }
 
-        if (($data['aud'] ?? null) !== $this->idpClientId) {
+        $aud = $data['aud'] ?? null;
+        $audiences = is_array($aud) ? $aud : [$aud];
+        if (!in_array($this->idpClientId, $audiences, true)) {
             throw new CustomUserMessageAuthenticationException('Token audience mismatch.');
         }
 

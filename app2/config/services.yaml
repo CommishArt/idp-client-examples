@@ -8,6 +8,7 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     idp_base_url: '%env(IDP_BASE_URL)%'
+    idp_client_id: '%env(IDP_CLIENT_ID)%'
     app_url: '%env(APP_URL)%'
 
 services:
@@ -24,6 +25,7 @@ services:
     App\Security\OidcAuthenticator:
         arguments:
             $idpBaseUrl: '%idp_base_url%'
+            $idpClientId: '%idp_client_id%'
 
     App\Controller\MainController:
         arguments:
