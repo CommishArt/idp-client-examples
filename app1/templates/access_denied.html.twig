@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block title %}Access Denied{% endblock %}
+{% block body %}
+<div class="card">
+    <h1>Access Denied</h1>
+    <div class="alert alert-error" style="margin-bottom:1.5rem;">
+        Your account does not have access to the Admin Panel.
+        Contact your administrator to request access.
+    </div>
+    <a href="{{ idp_base_url }}/account" class="btn btn-primary">Go to my account</a>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block title %}Dashboard — Admin Panel{% endblock %}
+{% block body %}
+<div class="card">
+    <h1>Welcome to the Admin Panel, {{ user.email }}</h1>
+    <p style="margin-bottom:1rem;color:#555;">You are authenticated via Commish SSO.</p>
+    <p style="margin-bottom:0.5rem;"><strong>Your roles:</strong>
+        {% for role in user.roles %}
+            <span class="badge">{{ role }}</span>
+        {% endfor %}
+    </p>
+    <p style="margin-top:1rem;">
+        <a href="{{ idp_base_url }}/account" class="btn btn-secondary" target="_blank">Manage my account</a>
+    </p>
+</div>
+{% endblock %}
