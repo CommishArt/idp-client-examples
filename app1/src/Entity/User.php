@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Commish\IdpBundle\Contract\IdpUserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Types\UuidType;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[ORM\HasLifecycleCallbacks]
-class User implements UserInterface
+class User implements IdpUserInterface
 {
     #[ORM\Id]
     #[ORM\Column(type: UuidType::NAME, unique: true)]
@@ -57,7 +57,7 @@ class User implements UserInterface
     public function getEmail(): string { return $this->email; }
     public function setEmail(string $email): static { $this->email = $email; return $this; }
 
-    public function getUserIdentifier(): string { return $this->email; }
+    public function getUserIdentifier(): string { return (string) $this->idpUuid; }
 
     public function getRoles(): array
     {

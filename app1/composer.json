@@ -1,4 +1,10 @@
 {
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:CommishArt/idp-bundle.git"
+        }
+    ],
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",
@@ -7,6 +13,7 @@
         "php": ">=8.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "commish/idp-bundle": "^1.0.10",
         "doctrine/doctrine-bundle": "^3.2",
         "doctrine/doctrine-migrations-bundle": "^4.0",
         "doctrine/orm": "^3.6",
@@ -96,8 +103,12 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false,
-            "require": "8.0.*"
+            "allow-contrib": true,
+            "require": "8.0.*",
+            "endpoint": [
+                "https://api.github.com/repos/CommishArt/recipes/contents/index.json",
+                "flex://defaults"
+            ]
         }
     },
     "require-dev": {

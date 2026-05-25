@@ -4,8 +4,52 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "82f3e1217ec137d5be1fc15667b93a44",
+    "content-hash": "ec9a69cc4b5bdca74210ef85e0003646",
     "packages": [
+        {
+            "name": "commish/idp-bundle",
+            "version": "v1.0.10",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:CommishArt/idp-bundle.git",
+                "reference": "dd5ecddd61c460e85dc807c23ad69d3deb3c4217"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CommishArt/idp-bundle/zipball/dd5ecddd61c460e85dc807c23ad69d3deb3c4217",
+                "reference": "dd5ecddd61c460e85dc807c23ad69d3deb3c4217",
+                "shasum": ""
+            },
+            "require": {
+                "knpuniversity/oauth2-client-bundle": "^2.20",
+                "league/oauth2-client": "^2.9",
+                "php": ">=8.4",
+                "symfony/framework-bundle": "^8.0",
+                "symfony/http-client": "^8.0",
+                "symfony/security-bundle": "^8.0",
+                "symfony/uid": "^8.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "symfony": {
+                    "allow-contrib": false
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Commish\\IdpBundle\\": "src/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "description": "Symfony bundle for connecting apps to the Commish IDP",
+            "support": {
+                "source": "https://github.com/CommishArt/idp-bundle/tree/v1.0.10",
+                "issues": "https://github.com/CommishArt/idp-bundle/issues"
+            },
+            "time": "2026-05-25T10:22:23+00:00"
+        },
         {
             "name": "composer/semver",
             "version": "3.4.4",

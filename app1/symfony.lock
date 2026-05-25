@@ -1,4 +1,13 @@
 {
+    "commish/idp-bundle": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/CommishArt/recipes",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "4b4e8bb0c18a6ab3a2f7db18fce0cc79b91f3be1"
+        }
+    },
     "doctrine/deprecations": {
         "version": "1.1",
         "recipe": {

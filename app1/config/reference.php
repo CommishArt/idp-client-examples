@@ -1464,6 +1464,20 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     },
  *     clients?: array<string, array<string, mixed>>,
  * }
+ * @psalm-type CommishIdpConfig = array{
+ *     base_url?: scalar|Param|null,
+ *     client_id?: scalar|Param|null,
+ *     client_secret?: scalar|Param|null,
+ *     app_key?: scalar|Param|null,
+ *     webhook_secret?: scalar|Param|null,
+ *     routes?: array{
+ *         login?: scalar|Param|null, // Default: "commish_idp_login"
+ *         callback?: scalar|Param|null, // Default: "commish_idp_oauth_callback"
+ *         logout?: scalar|Param|null, // Default: "commish_idp_logout"
+ *         dashboard?: scalar|Param|null, // Default: "app_dashboard"
+ *         access_denied?: scalar|Param|null, // Default: "commish_idp_access_denied"
+ *     },
+ * }
  * @psalm-type ConfigType = array{
  *     imports?: ImportsConfig,
  *     parameters?: ParametersConfig,
@@ -1478,6 +1492,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     security?: SecurityConfig,
  *     monolog?: MonologConfig,
  *     knpu_oauth2_client?: KnpuOauth2ClientConfig,
+ *     commish_idp?: CommishIdpConfig,
  *     "when@dev"?: array{
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
@@ -1495,6 +1510,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         monolog?: MonologConfig,
  *         maker?: MakerConfig,
  *         knpu_oauth2_client?: KnpuOauth2ClientConfig,
+ *         commish_idp?: CommishIdpConfig,
  *     },
  *     "when@prod"?: array{
  *         imports?: ImportsConfig,
@@ -1510,6 +1526,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         security?: SecurityConfig,
  *         monolog?: MonologConfig,
  *         knpu_oauth2_client?: KnpuOauth2ClientConfig,
+ *         commish_idp?: CommishIdpConfig,
  *     },
  *     "when@test"?: array{
  *         imports?: ImportsConfig,
@@ -1526,6 +1543,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         security?: SecurityConfig,
  *         monolog?: MonologConfig,
  *         knpu_oauth2_client?: KnpuOauth2ClientConfig,
+ *         commish_idp?: CommishIdpConfig,
  *     },
  *     ...<string, ExtensionType|array{ // extra keys must follow the when@%env% pattern or match an extension alias
  *         imports?: ImportsConfig,

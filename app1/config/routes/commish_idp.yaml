@@ -1,0 +1,2 @@
+commish_idp:
+    resource: '@CommishIdpBundle/config/routes.yaml'
