@@ -4,3 +4,5 @@ commish_idp:
     client_secret: '%env(IDP_CLIENT_SECRET)%'
     app_key: 'app1'
     webhook_secret: '%env(IDP_WEBHOOK_SECRET)%'
+    routes:
+        onboarding: app_onboarding

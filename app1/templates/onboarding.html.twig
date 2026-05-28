@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Welcome — App1{% endblock %}
+
+{% block body %}
+<div class="card" style="max-width: 520px; margin: 3rem auto;">
+    <h1>Welcome to App1!</h1>
+    <p style="margin-bottom: 1.5rem; color: #555;">
+        Before you continue, take a moment to get acquainted with the app.
+        Click the button below when you're ready to go to your dashboard.
+    </p>
+    <form method="post" action="{{ path('app_onboarding') }}">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('onboarding') }}">
+        <button type="submit" class="btn btn-primary">Get started</button>
+    </form>
+</div>
+{% endblock %}

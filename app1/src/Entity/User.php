@@ -6,6 +6,7 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Commish\IdpBundle\Contract\IdpUserInterface;
+use Commish\IdpBundle\Contract\NeedsOnboardingInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Types\UuidType;
 use Symfony\Component\Uid\Uuid;
@@ -13,7 +14,7 @@ use Symfony\Component\Uid\Uuid;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[ORM\HasLifecycleCallbacks]
-class User implements IdpUserInterface
+class User implements IdpUserInterface, NeedsOnboardingInterface
 {
     #[ORM\Id]
     #[ORM\Column(type: UuidType::NAME, unique: true)]
@@ -30,6 +31,9 @@ class User implements IdpUserInterface
 
     #[ORM\Column(type: 'json')]
     private array $roles = [];
+
+    #[ORM\Column(options: ['default' => false])]
+    private bool $onboarded = false;
 
     #[ORM\Column]
     private \DateTimeImmutable $createdAt;
@@ -69,6 +73,9 @@ class User implements IdpUserInterface
     public function setRoles(array $roles): static { $this->roles = $roles; return $this; }
 
     public function eraseCredentials(): void {}
+
+    public function isOnboarded(): bool { return $this->onboarded; }
+    public function setOnboarded(bool $onboarded): static { $this->onboarded = $onboarded; return $this; }
 
     public function getCreatedAt(): \DateTimeImmutable { return $this->createdAt; }
     public function getUpdatedAt(): \DateTimeImmutable { return $this->updatedAt; }

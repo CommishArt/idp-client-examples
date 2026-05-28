@@ -31,7 +31,10 @@
         <nav>
             {% if app.user %}
                 <a href="{{ path('app_dashboard') }}">Dashboard</a>
-                <a href="{{ path('commish_idp_logout') }}">Logout</a>
+                <form action="{{ path('commish_idp_logout') }}" method="post" style="display:inline;">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
+                    <button type="submit" class="btn" style="color:white;background:none;padding:0;margin-left:1.5rem;opacity:0.85;cursor:pointer;">Logout</button>
+                </form>
             {% endif %}
         </nav>
     </div>
