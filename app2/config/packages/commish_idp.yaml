@@ -1,0 +1,8 @@
+commish_idp:
+    base_url: '%env(IDP_BASE_URL)%'
+    client_id: '%env(IDP_CLIENT_ID)%'
+    client_secret: '%env(IDP_CLIENT_SECRET)%'
+    app_key: 'app2'
+    webhook_secret: '%env(IDP_WEBHOOK_SECRET)%'
+    routes:
+        onboarding: app_onboarding

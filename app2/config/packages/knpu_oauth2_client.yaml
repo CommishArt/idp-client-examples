@@ -2,10 +2,10 @@ knpu_oauth2_client:
     clients:
         idp:
             type: generic
-            provider_class: App\OAuth\IdpProvider
+            provider_class: Commish\IdpBundle\OAuth\IdpProvider
             client_id: '%env(IDP_CLIENT_ID)%'
             client_secret: '%env(IDP_CLIENT_SECRET)%'
-            redirect_route: oauth_callback
+            redirect_route: commish_idp_oauth_callback
             redirect_params: {}
             provider_options:
                 domain: '%env(IDP_BASE_URL)%'
