@@ -41,6 +41,9 @@ class User implements IdpUserInterface, NeedsOnboardingInterface
     #[ORM\Column]
     private \DateTimeImmutable $updatedAt;
 
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $loggedOutAt = null;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
@@ -79,4 +82,7 @@ class User implements IdpUserInterface, NeedsOnboardingInterface
 
     public function getCreatedAt(): \DateTimeImmutable { return $this->createdAt; }
     public function getUpdatedAt(): \DateTimeImmutable { return $this->updatedAt; }
+
+    public function getLoggedOutAt(): ?\DateTimeImmutable { return $this->loggedOutAt; }
+    public function setLoggedOutAt(?\DateTimeImmutable $loggedOutAt): static { $this->loggedOutAt = $loggedOutAt; return $this; }
 }

@@ -3,7 +3,7 @@ security:
         app_user_provider:
             entity:
                 class: App\Entity\User
-                property: email
+                property: idpUuid
 
     firewalls:
         dev:
@@ -14,14 +14,14 @@ security:
             lazy: true
             provider: app_user_provider
             custom_authenticators:
-                - App\Security\OidcAuthenticator
-            entry_point: App\Security\OidcAuthenticator
+                - Commish\IdpBundle\Security\OidcAuthenticator
+            entry_point: Commish\IdpBundle\Security\OidcAuthenticator
             logout:
-                path: app_logout
-                target: app_login
+                path: commish_idp_logout
 
     access_control:
         - { path: ^/login, roles: PUBLIC_ACCESS }
         - { path: ^/oauth, roles: PUBLIC_ACCESS }
+        - { path: ^/webhook, roles: PUBLIC_ACCESS }
         - { path: ^/access-denied, roles: PUBLIC_ACCESS }
         - { path: ^/, roles: ROLE_USER }

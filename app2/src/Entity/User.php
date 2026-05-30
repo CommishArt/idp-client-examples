@@ -5,15 +5,16 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Commish\IdpBundle\Contract\IdpUserInterface;
+use Commish\IdpBundle\Contract\NeedsOnboardingInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Types\UuidType;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[ORM\HasLifecycleCallbacks]
-class User implements UserInterface
+class User implements IdpUserInterface, NeedsOnboardingInterface
 {
     #[ORM\Id]
     #[ORM\Column(type: UuidType::NAME, unique: true)]
@@ -32,10 +33,16 @@ class User implements UserInterface
     private array $roles = [];
 
     #[ORM\Column]
+    private bool $onboarded = false;
+
+    #[ORM\Column]
     private \DateTimeImmutable $createdAt;
 
     #[ORM\Column]
     private \DateTimeImmutable $updatedAt;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $loggedOutAt = null;
 
     public function __construct()
     {
@@ -57,7 +64,7 @@ class User implements UserInterface
     public function getEmail(): string { return $this->email; }
     public function setEmail(string $email): static { $this->email = $email; return $this; }
 
-    public function getUserIdentifier(): string { return $this->email; }
+    public function getUserIdentifier(): string { return (string) $this->idpUuid; }
 
     public function getRoles(): array
     {
@@ -70,6 +77,12 @@ class User implements UserInterface
 
     public function eraseCredentials(): void {}
 
+    public function isOnboarded(): bool { return $this->onboarded; }
+    public function setOnboarded(bool $onboarded): static { $this->onboarded = $onboarded; return $this; }
+
     public function getCreatedAt(): \DateTimeImmutable { return $this->createdAt; }
     public function getUpdatedAt(): \DateTimeImmutable { return $this->updatedAt; }
+
+    public function getLoggedOutAt(): ?\DateTimeImmutable { return $this->loggedOutAt; }
+    public function setLoggedOutAt(?\DateTimeImmutable $loggedOutAt): static { $this->loggedOutAt = $loggedOutAt; return $this; }
 }

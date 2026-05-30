@@ -24,5 +24,6 @@ security:
     access_control:
         - { path: ^/login, roles: PUBLIC_ACCESS }
         - { path: ^/oauth, roles: PUBLIC_ACCESS }
+        - { path: ^/webhook, roles: PUBLIC_ACCESS }
         - { path: ^/access-denied, roles: PUBLIC_ACCESS }
         - { path: ^/, roles: ROLE_USER }
